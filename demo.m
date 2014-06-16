@@ -10,6 +10,7 @@ clear;
 addpath('./Affine Sample Functions');
 trackparam;                                                       % initial position and affine parameters
 opt.tmplsize = [32 32];                                           % [height width]
+opt.numsample = 600;
 sz = opt.tmplsize;
 n_sample = opt.numsample;
 
@@ -21,7 +22,13 @@ param.est = param0';
 
 num_p = 50;                                                         % obtain positive and negative templates for the SDC
 num_n = 200;
-[A_poso A_nego] = affineTrainG(dataPath, sz, opt, param, num_p, num_n, forMat, p0);        
+img_color = imread([dataPath int2str(1) forMat]);
+if size(img_color,3)==3
+  img	= double(rgb2gray(img_color));
+else
+  img	= double(img_color);
+end
+[A_poso A_nego] = affineTrainG(img, sz, opt, param, num_p, num_n, p0);        
 A_pos = A_poso;
 A_neg = A_nego;                                                     
 
@@ -29,7 +36,7 @@ patchsize = [6 6];                                                  % obtain the
 patchnum(1) = length(patchsize(1)/2 : 2: (sz(1)-patchsize(1)/2));
 patchnum(2) = length(patchsize(2)/2 : 2: (sz(2)-patchsize(2)/2));
 Fisize = 50;
-[Fio patcho] = affineTrainL(dataPath, param0, opt, patchsize, patchnum, Fisize, forMat);
+[Fio patcho] = affineTrainL(img, param0, opt, patchsize, patchnum, Fisize);
 Fi = Fio;    
 
 temp = importdata([dataPath 'datainfo.txt']);

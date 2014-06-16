@@ -1,4 +1,4 @@
-function [Fi patch] = affineTrainL(dataPath, param0, opt, patchsize, patchnum, Fisize, forMat)
+function [Fi patch] = affineTrainL(img, param0, opt, patchsize, patchnum, Fisize)
 % function [Fi patch] = affineTrainL(dataPath, param0, opt, patchsize, patchnum, Fisize, forMat)
 % obtain the dictionary for the SGM
 
@@ -20,12 +20,12 @@ function [Fi patch] = affineTrainL(dataPath, param0, opt, patchsize, patchnum, F
 %% All rights reserved.
 %% Date: 05/2012
 
-img_color = imread([dataPath int2str(1) forMat]);
-if size(img_color,3)==3
-    img	= double(rgb2gray(img_color));
-else
-    img	= double(img_color);
-end
+% img_color = imread([dataPath int2str(1) forMat]);
+% if size(img_color,3)==3
+%     img	= double(rgb2gray(img_color));
+% else
+%     img	= double(img_color);
+% end
 image = warpimg(img, param0, opt.tmplsize);
 
 patch = zeros(prod(patchsize), prod(patchnum));

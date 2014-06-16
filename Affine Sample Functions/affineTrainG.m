@@ -1,4 +1,4 @@
-function [X_pos X_neg] = affineTrainG(dataPath, sz, opt, param, num_p, num_n, forMat, p0)
+function [X_pos X_neg] = affineTrainG(img, sz, opt, param, num_p, num_n, p0)
 % function [X_pos X_neg] = affineTrainG(dataPath, sz, opt, param, num_p, num_n, forMat, p0)
 % obtain positive and negative templates for the SDC
 
@@ -21,12 +21,12 @@ function [X_pos X_neg] = affineTrainG(dataPath, sz, opt, param, num_p, num_n, fo
 %% All rights reserved.
 %% Date: 05/2012
 
-img_color = imread([dataPath int2str(1) forMat]);
-if size(img_color,3)==3
-    img	= double(rgb2gray(img_color));
-else
-    img	= double(img_color);
-end
+% img_color = imread([dataPath int2str(1) forMat]);
+% if size(img_color,3)==3
+%     img	= double(rgb2gray(img_color));
+% else
+%     img	= double(img_color);
+% end
 
 %%----------------- positive templates----------------%%
 n = num_p;     % Sampling Number

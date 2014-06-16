@@ -1,4 +1,4 @@
-function [X_neg alpha_qq] = updateDic(dataPath, sz, opt, param, num_n, forMat, p0, f, alpha_q, alpha_p, occMap)
+function [X_neg alpha_qq] = updateDic(img, sz, opt, param, num_n, p0, f, alpha_q, alpha_p, occMap)
 % function [X_neg alpha_qq] = updateDic(dataPath, sz, opt, param, num_n, forMat, p0, f, alpha_q, alpha_p, occMap)
 % update the negative templates in the SDC and the template histogram in the SGM
 
@@ -23,13 +23,6 @@ function [X_neg alpha_qq] = updateDic(dataPath, sz, opt, param, num_n, forMat, p
 %% Copyright (C) Wei Zhong.
 %% All rights reserved.
 %% Date: 05/2012
-
-img_color = imread([dataPath int2str(f) forMat]);
-if size(img_color,3)==3
-    img	= double(rgb2gray(img_color));
-else
-    img	= double(img_color);
-end
 
 %%----------------- update negative samples in the SDC ----------------%%
 n = num_n;    % Sampling Number
